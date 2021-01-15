@@ -7,7 +7,7 @@
 > Como adição ao exercício, foi criada a função `function serializeData(originalDate)` para tratar a data recebida, devolvendo-a de maneira mais legível.
 
 
-> Este projeto será melhorado futuramente com as seguintes implementações
+> Este projeto será melhorado futuramente com as seguintes implementações:
 >
 > :white_check_mark: Melhora da interface gráfica(agrupamento dos elementos)
 >
