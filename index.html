@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devic e-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>CoinMarketCap</title>
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Coin Market Cap</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex p-3 bd-highlight">
+        <div id="coins"></div>
+    </div>
+
+    <script type="text/javascript">
+        
+        function serializeDate(originalDate)
+        {
+            originalDate = new Date(originalDate);
+
+            let dd =  originalDate.getDate();
+            let mm = originalDate.getMonth();
+            let yyyy = originalDate.getFullYear();
+
+            return `${dd}/${mm}/${yyyy}`
+        }
+
+        // Key da API
+        let apikey = {
+            key: 'KEY_DA_API'
+        };
+
+        // Requisição GET para o ENDPOINT da api
+        fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY='
+            + apikey.key)
+            .then((response) => {
+                if(!response.ok) throw new Error('Erro ao executar a requisição, STATUS '
+                + response.status);
+
+                return response.json();
+            })
+            .then((api) => {
+                let texto = "";
+                
+                // Pegando duas criptomoeadas
+                for(let i = 0; i < 10; i++)
+                {
+                    // Mostrar informações da API
+                    texto = texto + `
+
+                        <div class="media">
+                            <img src="coin.jpg" class="align-self-center mr-3" alt="coin"
+                                width="100" height="60">
+                            
+                            <div class="media-body">
+                                <h5 class="mt-2">${api.data[i].name}</h5>
+                                <p class="mt-1">Data da primeira aparição
+                                    ${serializeDate(api.data[i].first_historical_data)}</p>
+                                <p>${api.data[i].symbol}</p>    
+                            </div> 
+                        </div>
+                    `;
+
+                    document.getElementById('coins').innerHTML = texto;
+                }
+            })
+            .catch((err) => console.error(err.message));
+    </script>
+</body>
+</html>
