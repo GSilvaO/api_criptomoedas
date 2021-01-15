@@ -10,4 +10,5 @@
 > Este projeto será melhorado futuramente com as seguintes implementações
 >
 > :white_check_mark: Melhora da interface gráfica(agrupamento dos elementos)
+>
 > :white_check_mark: Divisão do script para um arquivo próprio
